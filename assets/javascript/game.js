@@ -1,11 +1,29 @@
-const genres = ['rock','pop','jazz','indie','hiphop','country','dance','folk','soul','metal','reggae','punk','funk']
+
+//defining variables
+
+const genres = ['rock','pop','jazz','indie','hiphop','country','dance','folk','soul','metal','reggae','punk','funk'];
 
 let mysteryWord = genres[Math.floor(Math.random() * genres.length)];
 
-document.log(mysteryWord);
+let remainingGuesses = 15;
 
-document.write("hello");
+let mysteryArray = mysteryWord.split("");
 
-//for (i = 0; i < genres.length; i ++) {
+let wordDiv = document.getElementById('word');
 
-//}
+console.log(mysteryWord);
+console.log(remainingGuesses);
+console.log(mysteryArray);
+
+function displayWord() {
+
+    for (let i = 0; i < mysteryArray.length; i++){
+
+        const p = document.createElement('p');
+        p.textContent = mysteryArray[i];
+        wordDiv.appendChild(p);
+
+    }
+}
+
+displayWord(mysteryArray);
