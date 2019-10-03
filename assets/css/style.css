@@ -1,3 +1,16 @@
 h1 {
     color: blue;
 }
+
+#word {
+    font-weight: bold;
+    float: left;
+    height: 30px;
+}
+
+p {
+    float:left;
+    letter-spacing: 5px;
+    font-size: 20px;
+
+}
