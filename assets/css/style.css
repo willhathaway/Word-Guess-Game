@@ -1,5 +1,8 @@
 h1 {
-    color: blue;
+    font-weight: bold;
+    letter-spacing: 5px;
+    font-size: 20px;
+    padding:20px;
 }
 
 #word {
@@ -12,5 +15,5 @@ p {
     float:left;
     letter-spacing: 5px;
     font-size: 20px;
-
+    padding:20px;
 }

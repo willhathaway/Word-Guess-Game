@@ -1,51 +1,47 @@
-window.addEventListener('DOMContentLoaded', function(event) {
+window.addEventListener('DOMContentLoaded', function (event) {
 
-//defining the mystery words:
+            const genres = ['rock', 'pop', 'jazz', 'indie',
+                'hiphop', 'country', 'dance', 'folk', 'soul',
+                'metal', 'reggae', 'punk', 'funk'
+            ];
+            let mysteryWord = genres[Math.floor(Math.random() * genres.length)].split('');
+            let remainingGuess = 10;
+            let wordDiv = document.getElementById('word');
+            
+            console.log(mysteryWord);
 
-const genres = ['rock','pop','jazz','indie','hiphop','country','dance','folk','soul','metal','reggae','punk','funk'];
+            document.onkeyup = function () {
 
-//defining the randomly chosen word:
+                //from https://www.w3schools.com/jsref/tryit.asp?filename=tryjsref_event_key_keycode:
 
-let mysteryWord = genres[Math.floor(Math.random() * genres.length)];
+                let userGuess = String.fromCharCode(event.keyCode).toLowerCase();
 
-//breaking the mystery word into an array of its individual letters:
+                console.log(userGuess);
 
-let mysteryArray = mysteryWord.split('');
+                //function displayWord(array, event) {
 
-//defining a variable for a div with id='word' in the body of my HTML:
+                let i = 0
 
-let wordDiv = document.getElementById('word');
+                for (i; i < mysteryWord.length; i++) {
+                    if (mysteryWord[i] === userGuess) {
+                        const letter = document.createElement('p');
+                        letter.textContent = mysteryWord[i];
+                        wordDiv.appendChild(p);
+                        console.log(mysteryWord[i]);
+                        alert("Good!");
+                    }
+                }
+                if (mysteryWord[i] != userGuess) {
+                    remainingGuess = remainingGuess - 1;
+                }
+                    // }
 
-//logging to console to confirm that the above variables work:
+                    let guessHTML = "<p>remaining guesses: " + remainingGuess + "</p>";
 
-console.log(mysteryWord);
-console.log(mysteryArray);
+                    document.querySelector('#guessDiv').innerHTML = guessHTML;
+                    //document.querySelector('#word').innerHTML = letter;
 
-//function to loop through the array of the letters of the mystery word 
-//and display them in HTML as <p> paragraphs:
+                    console.log('DOM fully loaded and parsed');
 
-document.onkeyup = function () {
-    
-function displayWord(mysteryArray, event) {
-
-    for (let i = 0; i < mysteryArray.length; i++){
-
-        let userGuess = String.fromCharCode(event.keyCode).toLowerCase();
-
-        if (mysteryArray[i] = userGuess) {
-        let p = document.createElement('p');
-        p.textContent = mysteryArray[i];
-        console.log(mysteryArray[i])
-        wordDiv.appendChild(p);
-
-        }
-
-    }
-}
-
-displayWord(mysteryArray);
-
-}
-
-    console.log('DOM fully loaded and parsed');
-});
+                }
+            });
