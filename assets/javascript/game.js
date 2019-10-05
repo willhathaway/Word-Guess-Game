@@ -1,47 +1,78 @@
-window.addEventListener('DOMContentLoaded', function (event) {
+window.addEventListener('DOMContentLoaded', function () {
 
-            const genres = ['rock', 'pop', 'jazz', 'indie',
-                'hiphop', 'country', 'dance', 'folk', 'soul',
-                'metal', 'reggae', 'punk', 'funk'
-            ];
-            let mysteryWord = genres[Math.floor(Math.random() * genres.length)].split('');
-            let remainingGuess = 10;
-            let wordDiv = document.getElementById('word');
+    const genres = ['rock', 'pop', 'jazz', 'indie',
+        'hiphop', 'country', 'dance', 'folk', 'soul',
+        'metal', 'reggae', 'punk', 'funk'
+    ];
+
+    let mysteryWord = genres[Math.floor(Math.random() * genres.length)].split('');
+    let remainingGuess = 10;
+    let numberOfSuccessfulGuesses = 0;
+
+    console.log(mysteryWord);
+
+    document.onkeyup = function () {
+
+        //from https://www.w3schools.com/jsref/tryit.asp?filename=tryjsref_event_key_keycode:
+
+        let userGuess = String.fromCharCode(event.keyCode).toLowerCase();
+    
+        console.log(userGuess);
+
+        if ((mysteryWord.includes(userGuess)) && (remainingGuess > 0)) {
+
+            for (let i = 0; i < mysteryWord.length; i++) {
+
+                console.log("for loop working");
+
+                
+
+            }
+            //https://www.homeandlearn.co.uk/javascript/create_html_elements.html
             
-            console.log(mysteryWord);
+            let letter = document.createElement('p');
+            let text = document.createTextNode(userGuess);
+            letter.appendChild(text);
+            let position = document.getElementById("word");
+            document.body.insertBefore(text, position);
+            numberOfSuccessfulGuesses = numberOfSuccessfulGuesses + 1;
 
-            document.onkeyup = function () {
+        } else {
+            
+            let wrongGuess = document.createElement('p');
+            let text = document.createTextNode(userGuess);
+            wrongGuess.appendChild(text);
+            let position = document.getElementById("wrong");
+            document.body.insertBefore(text, position);
+            remainingGuess = remainingGuess - 1;
+        }
 
-                //from https://www.w3schools.com/jsref/tryit.asp?filename=tryjsref_event_key_keycode:
+        console.log(mysteryWord.length);
 
-                let userGuess = String.fromCharCode(event.keyCode).toLowerCase();
+        if (numberOfSuccessfulGuesses === mysteryWord.length) {
+            let win = document.createElement('p');
+            let text = document.createTextNode("win");
+            win.appendChild(text);
+            let position = document.getElementById("result");
+            document.body.insertBefore(text, position);
+        }
 
-                console.log(userGuess);
+        if (remainingGuess < 1){
+            let lose = document.createElement('p');
+            let text = document.createTextNode("lose");
+            lose.appendChild(text);
+            let position = document.getElementById("result");
+            document.body.insertBefore(text, position);
+            //location.reload();
+        }
+        console.log(numberOfSuccessfulGuesses);
 
-                //function displayWord(array, event) {
+        let guessHTML = "<p>remaining guesses: " + remainingGuess + "</p>";
 
-                let i = 0
+        document.querySelector('#guessDiv').innerHTML = guessHTML;
+        
 
-                for (i; i < mysteryWord.length; i++) {
-                    if (mysteryWord[i] === userGuess) {
-                        const letter = document.createElement('p');
-                        letter.textContent = mysteryWord[i];
-                        wordDiv.appendChild(p);
-                        console.log(mysteryWord[i]);
-                        alert("Good!");
-                    }
-                }
-                if (mysteryWord[i] != userGuess) {
-                    remainingGuess = remainingGuess - 1;
-                }
-                    // }
 
-                    let guessHTML = "<p>remaining guesses: " + remainingGuess + "</p>";
 
-                    document.querySelector('#guessDiv').innerHTML = guessHTML;
-                    //document.querySelector('#word').innerHTML = letter;
-
-                    console.log('DOM fully loaded and parsed');
-
-                }
-            });
+    }
+});
