@@ -8,6 +8,8 @@ window.addEventListener('DOMContentLoaded', function () {
     let mysteryWord = genres[Math.floor(Math.random() * genres.length)].split('');
     let remainingGuess = 10;
     let numberOfSuccessfulGuesses = 0;
+    let guessArray = new Array(mysteryWord.length);
+    let index = 0;
 
     console.log(mysteryWord);
 
@@ -16,29 +18,49 @@ window.addEventListener('DOMContentLoaded', function () {
         //from https://www.w3schools.com/jsref/tryit.asp?filename=tryjsref_event_key_keycode:
 
         let userGuess = String.fromCharCode(event.keyCode).toLowerCase();
-    
-        console.log(userGuess);
+
+        console.log('mysterword len:', mysteryWord.length);
 
         if ((mysteryWord.includes(userGuess)) && (remainingGuess > 0)) {
 
             for (let i = 0; i < mysteryWord.length; i++) {
 
-                console.log("for loop working");
+                if (userGuess == mysteryWord[i]) {
+                    index = i;
+                    guessArray.splice(index, index, userGuess);
+                } else {
+                    guessArray.splice(i, i, '_');
+                }
+            };
 
-                
-
-            }
             //https://www.homeandlearn.co.uk/javascript/create_html_elements.html
-            
+
+            console.log('mysteryword', mysteryWord);
+            console.log('userguess', userGuess);
+            console.log('guessarray', guessArray);
+
+
+
             let letter = document.createElement('p');
-            let text = document.createTextNode(userGuess);
+
+            console.log('letter', letter);
+            let text = document.createTextNode(guessArray.join(''));
+            console.log('text', text);
             letter.appendChild(text);
             let position = document.getElementById("word");
+            console.log('position', position);
             document.body.insertBefore(text, position);
             numberOfSuccessfulGuesses = numberOfSuccessfulGuesses + 1;
 
+            //let letter = document.createElement('p');
+            //let text = document.createTextNode(userGuess);
+            //letter.appendChild(text);
+            //let position = document.getElementById("word");
+            //document.body.insertBefore(text, position);
+            //numberOfSuccessfulGuesses = numberOfSuccessfulGuesses + 1;
+
         } else {
-            
+
             let wrongGuess = document.createElement('p');
             let text = document.createTextNode(userGuess);
             wrongGuess.appendChild(text);
@@ -49,7 +71,7 @@ window.addEventListener('DOMContentLoaded', function () {
 
         console.log(mysteryWord.length);
 
-        if (numberOfSuccessfulGuesses === mysteryWord.length) {
+        if (numberOfSuccessfulGuesses >= mysteryWord.length) {
             let win = document.createElement('p');
             let text = document.createTextNode("win");
             win.appendChild(text);
@@ -57,7 +79,7 @@ window.addEventListener('DOMContentLoaded', function () {
             document.body.insertBefore(text, position);
         }
 
-        if (remainingGuess < 1){
+        if (remainingGuess < 1) {
             let lose = document.createElement('p');
             let text = document.createTextNode("lose");
             lose.appendChild(text);
@@ -70,9 +92,6 @@ window.addEventListener('DOMContentLoaded', function () {
         let guessHTML = "<p>remaining guesses: " + remainingGuess + "</p>";
 
         document.querySelector('#guessDiv').innerHTML = guessHTML;
-        
-
-
 
     }
 });
