@@ -4,8 +4,7 @@ window.addEventListener('DOMContentLoaded', function () {
 
     const genres = ['rock', 'pop', 'jazz', 'indie',
         'hiphop', 'country', 'dance', 'folk', 'soul',
-        'metal', 'reggae', 'punk', 'funk'
-    ];
+        'metal', 'reggae', 'punk', 'funk'];
 
     //setting global variables
 
@@ -15,7 +14,6 @@ window.addEventListener('DOMContentLoaded', function () {
     let guessArray = new Array(mysteryWord.length);
     let index = 0;
  
-
     console.log(mysteryWord);
 
     //onkey up function:
@@ -43,10 +41,25 @@ window.addEventListener('DOMContentLoaded', function () {
                     if (guess == word[i]) {
                         index = i;
                         guessarray.splice(index, index, guess);
-                        localStorage.setItem("guessArray", guessarray.toString());
                     }
                 }
             };
+
+            //alternative function (doesn't work)
+
+            //function compareArrays(word, guess, guessarray) {
+            //    for (let i = 0; i < word.length; i++) {
+            //        if ((guessarray.length < 1) && (guess == word[i])) {
+            //            guessarray.push(word[i])
+            //        }
+            //        else if ((guessarray.length > 0) && (guess == word[i])) {
+            //       guessarray.splice(i, i, ' ');}
+            //        else {
+            //            index = i;
+            //            guessarray.splice(index, index, guess);
+            //        }
+            //    }
+            //};
 
             //calls the compareArrays function on the mysteryWord, userGuess, and guessArray:
 
@@ -87,7 +100,7 @@ window.addEventListener('DOMContentLoaded', function () {
 
         if ((guessArray === mysteryWord) || (numberOfSuccessfulGuesses >= mysteryWord.length)) {
             let win = document.createElement('p');
-            let text = document.createTextNode("win");
+            let text = document.createTextNode("win!");
             win.appendChild(text);
             let position = document.getElementById("result");
             document.body.insertBefore(text, position);
