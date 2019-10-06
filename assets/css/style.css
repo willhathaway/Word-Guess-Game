@@ -1,23 +1,30 @@
+@import url("https://fonts.googleapis.com/css?family=Montserrat&display=swap");
+
 body {
+    font-family: 'Montserrat', sans-serif;
     font-weight: bold;
     letter-spacing: 5px;
     font-size: 20px;
     padding:20px;
     float: left;
-    
 }
 
 h1{
-    background-color: wheat;
+    font-family: 'Montserrat', sans-serif;
     padding:20px;
 }
 
 p{
-    background-color: wheat;
-    padding:20px;
+    font-family: 'Montserrat', sans-serif;
+   
 }
 
 div {
-    background-color: wheat;
+    font-family: 'Montserrat', sans-serif;
     padding:20px;
+}
+
+img {
+    width:50%;
+    visibility: hidden;
 }
